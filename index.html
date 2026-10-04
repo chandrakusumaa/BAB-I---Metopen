@@ -1,183 +1,514 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sidang Proposal Skripsi - Mursid Jafar Chandra Kusuma</title>
-<style>
-:root{--navy:#1e3a5f;--slate:#4a6785;--bg:#f7f9fc;--card:#fff;--line:#d9e1ec;--ink:#1f2937;--muted:#6b7a90}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif}
-.deck{position:relative;width:100%;height:100%}
-.slide{position:absolute;inset:0;padding:5vh 7vw 9vh;display:flex;flex-direction:column;justify-content:center;opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity .5s ease,transform .5s ease,visibility .5s}
-.slide.active{opacity:1;visibility:visible;transform:none}
-.slide.prev{transform:translateX(-40px)}
-.slide::before{content:"";position:absolute;left:0;top:0;bottom:0;width:10px;background:linear-gradient(var(--navy),var(--slate))}
-.tag{font-size:clamp(14px,1.4vw,22px);letter-spacing:.15em;text-transform:uppercase;color:var(--slate);font-weight:600;margin-bottom:1vh}
-h1{font-size:clamp(26px,3.4vw,52px);line-height:1.25;color:var(--navy);font-weight:700}
-h2{font-size:clamp(28px,3.4vw,52px);color:var(--navy);font-weight:700;margin-bottom:3.5vh;padding-bottom:1.5vh;border-bottom:3px solid var(--line);position:relative}
-h2::after{content:"";position:absolute;left:0;bottom:-3px;width:90px;height:3px;background:var(--navy)}
-h3{font-size:clamp(20px,2.2vw,34px);color:var(--navy);margin-bottom:2vh}
-p,li{font-size:clamp(17px,1.9vw,30px);line-height:1.5}
-ul{list-style:none}
-ul li{position:relative;padding-left:1.4em;margin-bottom:2vh}
-ul li::before{content:"";position:absolute;left:0;top:.6em;width:.55em;height:.55em;border-radius:50%;background:var(--navy)}
-b{color:var(--navy)}
-.cols{display:grid;grid-template-columns:1.15fr 1fr;gap:4vw;align-items:center}
-.cols.eq{grid-template-columns:1fr 1fr;align-items:start}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:3vh 2.4vw;box-shadow:0 4px 18px rgba(30,58,95,.06)}
-.image-placeholder{background:#e5e8ed;border:2px dashed #6b7280;border-radius:12px;aspect-ratio:16/9;width:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:#4b5563;font-size:clamp(14px,1.4vw,22px)}
-.image-placeholder.logo{aspect-ratio:1/1;width:clamp(90px,12vw,170px);padding:.5rem;font-size:clamp(11px,1vw,15px);margin:0 auto 3vh}
-.cover{text-align:center;align-items:center}
-.cover h1{max-width:1100px;margin:0 auto 3vh}
-.sub{display:inline-block;background:var(--navy);color:#fff;padding:.7vh 1.8vw;border-radius:30px;font-size:clamp(16px,1.8vw,28px);margin-bottom:4vh}
-.who{font-size:clamp(18px,2vw,32px);line-height:1.6}
-.who strong{color:var(--navy)}
-.who small{display:block;font-size:clamp(13px,1.3vw,20px);color:var(--muted)}
-.src{font-size:clamp(11px,1vw,15px);color:var(--muted);margin-top:2vh}
-ol{list-style:none;counter-reset:n}
-ol li{counter-increment:n;display:flex;gap:1.5vw;align-items:flex-start;margin-bottom:3vh;padding:2.2vh 2vw}
-ol li::before{content:counter(n);flex:none;width:2.2em;height:2.2em;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em}
-.icons li{display:flex;gap:1.5vw;align-items:flex-start;padding:2.5vh 2vw;margin-bottom:3vh}
-.icons li::before{display:none}
-.ic{flex:none;width:2.4em;height:2.4em;border-radius:12px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.95em}
-.nav{position:fixed;bottom:2.5vh;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:1.5vw;z-index:10}
-.nav button{border:1px solid var(--line);background:#fff;color:var(--navy);width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;transition:.2s}
-.nav button:hover{background:var(--navy);color:#fff}
-.dots{display:flex;gap:8px}
-.dots i{width:10px;height:10px;border-radius:50%;background:var(--line);cursor:pointer;transition:.3s}
-.dots i.on{background:var(--navy);width:28px;border-radius:6px}
-.count{position:fixed;right:2vw;bottom:3vh;font-size:14px;color:var(--muted);z-index:10}
-@media(max-width:800px){.cols,.cols.eq{grid-template-columns:1fr}.slide{overflow-y:auto;justify-content:flex-start}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sidang Proposal Skripsi - Mursid Jafar Chandra Kusuma</title>
+  <style>
+    :root {
+      --navy: #1e3a5f;
+      --slate: #4a6785;
+      --bg: #f7f9fc;
+      --card: #fff;
+      --line: #d9e1ec;
+      --ink: #1f2937;
+      --muted: #6b7a90
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif
+    }
+
+    .deck {
+      position: relative;
+      width: 100%;
+      height: 100%
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 5vh 7vw 9vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(40px);
+      transition: opacity .5s ease, transform .5s ease, visibility .5s
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: none
+    }
+
+    .slide.prev {
+      transform: translateX(-40px)
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 10px;
+      background: linear-gradient(var(--navy), var(--slate))
+    }
+
+    .tag {
+      font-size: clamp(14px, 1.4vw, 22px);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--slate);
+      font-weight: 600;
+      margin-bottom: 1vh
+    }
+
+    h1 {
+      font-size: clamp(26px, 3.4vw, 52px);
+      line-height: 1.25;
+      color: var(--navy);
+      font-weight: 700
+    }
+
+    h2 {
+      font-size: clamp(28px, 3.4vw, 52px);
+      color: var(--navy);
+      font-weight: 700;
+      margin-bottom: 3.5vh;
+      padding-bottom: 1.5vh;
+      border-bottom: 3px solid var(--line);
+      position: relative
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 90px;
+      height: 3px;
+      background: var(--navy)
+    }
+
+    h3 {
+      font-size: clamp(20px, 2.2vw, 34px);
+      color: var(--navy);
+      margin-bottom: 2vh
+    }
+
+    p,
+    li {
+      font-size: clamp(17px, 1.9vw, 30px);
+      line-height: 1.5
+    }
+
+    ul {
+      list-style: none
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 1.4em;
+      margin-bottom: 2vh
+    }
+
+    ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .6em;
+      width: .55em;
+      height: .55em;
+      border-radius: 50%;
+      background: var(--navy)
+    }
+
+    b {
+      color: var(--navy)
+    }
+
+    .cols {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 4vw;
+      align-items: center
+    }
+
+    .cols.eq {
+      grid-template-columns: 1fr 1fr;
+      align-items: start
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 3vh 2.4vw;
+      box-shadow: 0 4px 18px rgba(30, 58, 95, .06)
+    }
+
+    .image-placeholder {
+      background: #e5e8ed;
+      border: 2px dashed #6b7280;
+      border-radius: 12px;
+      aspect-ratio: 16/9;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      color: #4b5563;
+      font-size: clamp(14px, 1.4vw, 22px)
+    }
+
+    .image-placeholder.logo {
+      aspect-ratio: 1/1;
+      width: clamp(90px, 12vw, 170px);
+      padding: .5rem;
+      font-size: clamp(11px, 1vw, 15px);
+      margin: 0 auto 3vh
+    }
+
+    .cover {
+      text-align: center;
+      align-items: center
+    }
+
+    .cover h1 {
+      max-width: 1100px;
+      margin: 0 auto 3vh
+    }
+
+    .sub {
+      display: inline-block;
+      background: var(--navy);
+      color: #fff;
+      padding: .7vh 1.8vw;
+      border-radius: 30px;
+      font-size: clamp(16px, 1.8vw, 28px);
+      margin-bottom: 4vh
+    }
+
+    .who {
+      font-size: clamp(18px, 2vw, 32px);
+      line-height: 1.6
+    }
+
+    .who strong {
+      color: var(--navy)
+    }
+
+    .who small {
+      display: block;
+      font-size: clamp(13px, 1.3vw, 20px);
+      color: var(--muted)
+    }
+
+    .src {
+      font-size: clamp(11px, 1vw, 15px);
+      color: var(--muted);
+      margin-top: 2vh
+    }
+
+    ol {
+      list-style: none;
+      counter-reset: n
+    }
+
+    ol li {
+      counter-increment: n;
+      display: flex;
+      gap: 1.5vw;
+      align-items: flex-start;
+      margin-bottom: 3vh;
+      padding: 2.2vh 2vw
+    }
+
+    ol li::before {
+      content: counter(n);
+      flex: none;
+      width: 2.2em;
+      height: 2.2em;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .9em
+    }
+
+    .icons li {
+      display: flex;
+      gap: 1.5vw;
+      align-items: flex-start;
+      padding: 2.5vh 2vw;
+      margin-bottom: 3vh
+    }
+
+    .icons li::before {
+      display: none
+    }
+
+    .ic {
+      flex: none;
+      width: 2.4em;
+      height: 2.4em;
+      border-radius: 12px;
+      background: var(--navy);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95em
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 2.5vh;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5vw;
+      z-index: 10
+    }
+
+    .nav button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--navy);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      transition: .2s
+    }
+
+    .nav button:hover {
+      background: var(--navy);
+      color: #fff
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px
+    }
+
+    .dots i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--line);
+      cursor: pointer;
+      transition: .3s
+    }
+
+    .dots i.on {
+      background: var(--navy);
+      width: 28px;
+      border-radius: 6px
+    }
+
+    .count {
+      position: fixed;
+      right: 2vw;
+      bottom: 3vh;
+      font-size: 14px;
+      color: var(--muted);
+      z-index: 10
+    }
+
+    @media(max-width:800px) {
+
+      .cols,
+      .cols.eq {
+        grid-template-columns: 1fr
+      }
+
+      .slide {
+        overflow-y: auto;
+        justify-content: flex-start
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="deck" id="deck">
+  <div class="deck" id="deck">
 
-<section class="slide cover active">
-  <div class="image-placeholder logo">Tempatkan Logo Kampus/Fakultas Di Sini</div>
-  <h1>Analisis Komparasi Aturan Warna RGB-YCbCr dan RGB-HSV sebagai Pra-pemrosesan Deep Learning pada Deteksi Kebakaran Drone</h1>
-  <div class="sub">Sidang Proposal Skripsi</div>
-  <div class="who">
-    <strong>Mursid Jafar Chandra Kusuma</strong><br>NIM 2510511030
-    <small>S1 Informatika · Fakultas Ilmu Komputer · UPN “Veteran” Jakarta · 2026</small>
-  </div>
-</section>
+    <section class="slide cover active">
+      <img src="Asset/Logo_Upn.jpg" alt="Logo UPN" style="width: clamp(100px, 14vw, 200px); height: auto; margin: 0 auto 3vh; display: block; object-fit: contain;">
+      <h1>Analisis Komparasi Aturan Warna RGB-YCbCr dan RGB-HSV sebagai Pra-pemrosesan Deep Learning pada Deteksi
+        Kebakaran Drone</h1>
+      <div class="sub">Sidang Proposal Skripsi</div>
+      <div class="who">
+        <strong>Mursid Jafar Chandra Kusuma</strong><br>NIM 2510511030
+        <small>S1 Informatika · Fakultas Ilmu Komputer · UPN “Veteran” Jakarta · 2026</small>
+      </div>
+    </section>
 
-<section class="slide">
-  <div class="tag">Latar Belakang</div>
-  <h2>Akar Masalah</h2>
-  <div class="cols">
-    <ul>
-      <li><b>Penggunaan Drone (UAV):</b> sangat efektif untuk jangkauan pemantauan kebakaran yang luas.</li>
-      <li><b>Kelemahan Deep Learning Murni:</b> sering terkecoh objek mirip api (atap rumah, dedaunan, pantulan cahaya) sehingga memicu <b>alarm palsu (false positive)</b>.</li>
-      <li><b>Keterbatasan Resource:</b> beban komputasi deep learning sangat berat untuk drone, sehingga kecepatan deteksi (FPS) turun drastis.</li>
-    </ul>
-    <div>
-      <div class="image-placeholder">Tempatkan Ilustrasi Drone Memantau Kebakaran Di Sini</div>
-      <p class="src">Sumber: Hossain et al. (2020); Buriboev et al. (2025)</p>
-    </div>
-  </div>
-</section>
+    <section class="slide">
+      <div class="tag">Latar Belakang</div>
+      <h2>Akar Masalah</h2>
+      <div style="text-align: justify;">
+        <ul>
+          <li><b>Tantangan Visual Pemantauan Udara:</b> Objek api pada citra drone seringkali berukuran sangat kecil dan
+            berbaur dengan dinamika pencahayaan luar ruangan (outdoor).</li>
+          <li><b>Kelemahan Deep Learning Murni:</b> Model yang murni mengandalkan data (data-driven) rentan menghasilkan
+            alarm palsu (false positive) akibat objek pengecoh
+            (noise visual) seperti pantulan cahaya atap atau dedaunan kering.</li>
+          <li><b>Krisis Sumber Daya Komputasi:</b> Arsitektur deep learning memberikan beban komputasi yang berat pada
+            perangkat drone (UAV), mengorbankan kecepatan pemrosesan
+            dan menghilangkan kemampuan deteksi real-time.</li>
+        </ul>
+      </div>
+    </section>
 
-<section class="slide">
-  <div class="tag">Latar Belakang</div>
-  <h2>Solusi &amp; Research Gap</h2>
-  <div class="cols">
-    <ul>
-      <li><b>Solusi Pra-pemrosesan Warna:</b> ruang warna (RGB, YCbCr, HSV) ringan dan efektif menyaring noise visual sebelum masuk ke model Deep Learning (real-time pada quadcopter: 0,022 detik).</li>
-      <li><b>Research Gap:</b> belum ada komparasi langsung yang menguji kombinasi <b>RGB-YCbCr vs RGB-HSV</b> untuk mencari titik keseimbangan antara akurasi dan kecepatan komputasi (FPS) pada perangkat drone.</li>
-    </ul>
-    <div>
-      <div class="image-placeholder">Tempatkan Contoh Gambar False Positive / Pemisahan Ruang Warna Di Sini</div>
-      <p class="src">Sumber: Baharuddin et al. (2025); Munshi (2021); Tumonglo et al. (2019)</p>
-    </div>
-  </div>
-</section>
+    <section class="slide">
+      <div class="tag">Latar Belakang</div>
+      <h2>Solusi &amp; Research Gap</h2>
+      <div style="text-align: justify;">
+        <ul>
+          <li><b>Solusi Pra-pemrosesan Warna:</b> Segmentasi ruang warna (RGB, YCbCr, HSV) terbukti sangat ringan secara
+            komputasi dan efektif dalam menyaring
+            kandidat area api dari noise visual sebelum masuk ke model Deep Learning.</li>
+          <li><b>Research Gap:</b> belum ada komparasi langsung yang menguji efektivitas kombinasi aturan warna <b>(
+              RGB-YCbCr vs RGB-HSV)</b> sebagai lapis pra-pemrosesan deep learning pada perangkat drone.</li>
+          <li><b>Fokus Optimalisasi:</b> Menemukan "titik seimbang" (trade-off) paling ideal antara tingkat akurasi
+            (menekan false positive) dan kecepatan komputasi real-time di perangkat bersumber daya terbatas.</li>
+        </ul>
+      </div>
+    </section>
 
-<section class="slide">
-  <div class="tag">Pertanyaan Penelitian</div>
-  <h2>Rumusan Masalah</h2>
-  <ol>
-    <li class="card">Bagaimana perbandingan tingkat akurasi (khususnya menekan <b>false positive</b>) antara penggunaan kombinasi aturan warna RGB-YCbCr dan RGB-HSV sebagai metode pra-pemrosesan model deep learning untuk deteksi kebakaran?</li>
-    <li class="card">Bagaimana pengaruh penerapan kedua metode tersebut terhadap beban komputasi dan efisiensi waktu pemrosesan (<b>Frame Per Second / FPS</b>) saat diimplementasikan secara real-time melalui citra drone?</li>
-  </ol>
-</section>
+    <section class="slide">
+      <div class="tag">Pertanyaan Penelitian</div>
+      <h2>Rumusan Masalah</h2>
+      <div style="text-align: justify;">
+        <ol>
+          <li class="card">
+            <div>
+              Bagaimana perbandingan tingkat akurasi (khususnya menekan <b>false positive</b>) antara
+              penggunaan kombinasi aturan warna RGB-YCbCr dan RGB-HSV sebagai metode pra-pemrosesan model deep learning
+              untuk deteksi kebakaran?
+            </div>
+          </li>
+          <li class="card">
+            <div>
+              Bagaimana pengaruh penerapan kedua metode tersebut terhadap beban komputasi dan efisiensi waktu
+              pemrosesan (<b>Frame Per Second / FPS</b>) saat diimplementasikan secara real-time melalui citra drone?
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-<section class="slide">
-  <div class="tag">Ruang Lingkup</div>
-  <h2>Batasan Masalah</h2>
-  <ul>
-    <li><b>Fokus Filter:</b> hanya membandingkan pra-pemrosesan RGB-YCbCr dan RGB-HSV.</li>
-    <li><b>Model Klasifikasi:</b> menggunakan arsitektur deep learning yang sama (mis. SSD atau YOLO) sebagai tolok ukur.</li>
-    <li><b>Kondisi Pengujian:</b> pengenalan piksel api pada lingkungan luar (outdoor) dari citra/video udara drone.</li>
-    <li><b>Metrik Evaluasi:</b> akurasi (penolakan false positive) &amp; kecepatan komputasi (FPS).</li>
-    <li><b>Batasan Teknis:</b> fokus pada software (computer vision), tidak membahas hardware penerbangan atau sistem kendali terbang drone.</li>
-  </ul>
-</section>
-
-<section class="slide">
-  <div class="tag">Sasaran</div>
-  <h2>Tujuan Penelitian</h2>
-  <ul class="icons">
-    <li class="card"><span class="ic">🎯</span><span>Membandingkan tingkat akurasi antara kombinasi <b>RGB-YCbCr</b> dan <b>RGB-HSV</b> dalam menekan false positive sebagai pra-pemrosesan deep learning.</span></li>
-    <li class="card"><span class="ic">⚡</span><span>Mengukur dan menganalisis beban komputasi serta kecepatan (FPS) dari kedua metode tersebut untuk operasional real-time di drone.</span></li>
-  </ul>
-</section>
-
-<section class="slide">
-  <div class="tag">Kontribusi</div>
-  <h2>Manfaat Penelitian</h2>
-  <div class="cols eq">
-    <div class="card">
-      <h3>Manfaat Teoretis</h3>
+    <section class="slide">
+      <div class="tag">Ruang Lingkup</div>
+      <h2>Batasan Masalah</h2>
       <ul>
-        <li>Mengisi research gap terkait efisiensi komputasi ruang warna.</li>
-        <li>Optimasi arsitektur deep learning pada perangkat bersumber daya terbatas (drone).</li>
+        <li><b>Fokus Filter:</b> Terbatas pada perbandingan dua kombinasi metode pra-pemrosesan warna: RGB-YCbCr dan
+          RGB-HSV.</li>
+        <li><b>Model Klasifikasi:</b> Menggunakan satu arsitektur deep learning yang telah ditetapkan sebagai variabel
+          tetap (SSD atau YOLO)</li>
+        <li><b>Kondisi Pengujian:</b> Pengenalan piksel api difokuskan pada lingkungan luar ruangan (outdoor)
+          menggunakan dataset citra atau video udara dari UAV/drone.
+        </li>
+        <li><b>Metrik Evaluasi:</b> Difokuskan pada akurasi sistem (khususnya tingkat penolakan false positive) dan
+          efisiensi waktu komputasi (Frame Per Second / FPS).</li>
+        <li><b>Batasan Teknis:</b> Ranah penelitian berfokus murni pada rekayasa perangkat lunak (computer vision),
+          tidak mencakup perancangan hardware fisik, maupun sistem kendali terbang drone.</li>
       </ul>
-    </div>
-    <div class="card">
-      <h3>Manfaat Praktis</h3>
-      <ul>
-        <li><b>Bagi Pengembang:</b> rekomendasi arsitektur computer vision yang paling ringan dan akurat.</li>
-        <li><b>Bagi BNPB / Pemadam / Kehutanan:</b> mendukung sistem peringatan dini kebakaran dari udara yang responsif, andal, dan minim error.</li>
-      </ul>
-    </div>
+    </section>
+
+    <section class="slide">
+      <div class="tag">Sasaran &amp; Kontribusi</div>
+      <h2>Tujuan &amp; Manfaat Penelitian</h2>
+      <div class="cols eq">
+        <div class="card">
+          <h3>🎯 Tujuan Penelitian</h3>
+          <ul style="text-align: justify;">
+            <li>Membandingkan tingkat akurasi (khususnya efektivitas menekan false positive) antara kombinasi
+              <b>RGB-YCbCr</b> dan <b>RGB-HSV</b>
+            </li>
+            <li>Mengukur dan menganalisis beban komputasi serta kecepatan pemrosesan secara real-time pada drone.
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>💡 Manfaat Penelitian</h3>
+          <ul style="text-align: justify;">
+            <li><b>Teoretis:</b> Menjawab research gap terkait efisiensi komputasi filter ruang warna pada arsitektur
+              deep learning berdaya terbatas.</li>
+            <li><b>Praktis:</b> Memberikan rekomendasi arsitektur optimal bagi developer computer vision dan menjadi
+              landasan sistem mitigasi bencana udara yang andal bagi instansi terkait (BNPB/Pemadam Kebakaran).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide cover">
+      <h1>Terima Kasih</h1>
+      <div class="sub">Sesi Tanya Jawab &amp; Masukan</div>
+      <div class="who">
+        <strong>Mursid Jafar Chandra Kusuma</strong><br>
+        <small>S1 Informatika · Fakultas Ilmu Komputer · UPN “Veteran” Jakarta</small>
+      </div>
+    </section>
+
   </div>
-</section>
 
-</div>
+  <div class="nav">
+    <button id="prev" aria-label="Sebelumnya">‹</button>
+    <div class="dots" id="dots"></div>
+    <button id="next" aria-label="Berikutnya">›</button>
+  </div>
+  <div class="count" id="count"></div>
 
-<div class="nav">
-  <button id="prev" aria-label="Sebelumnya">‹</button>
-  <div class="dots" id="dots"></div>
-  <button id="next" aria-label="Berikutnya">›</button>
-</div>
-<div class="count" id="count"></div>
-
-<script>
-(function(){
-  var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
-  var dots=document.getElementById('dots'),count=document.getElementById('count');
-  slides.forEach(function(_,i){var d=document.createElement('i');d.onclick=function(){go(i)};dots.appendChild(d)});
-  function go(n){
-    if(n<0||n>=slides.length)return;
-    slides.forEach(function(s,i){s.classList.toggle('active',i===n);s.classList.toggle('prev',i<n)});
-    [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===n)});
-    count.textContent=(n+1)+' / '+slides.length;cur=n;
-  }
-  document.getElementById('next').onclick=function(){go(cur+1)};
-  document.getElementById('prev').onclick=function(){go(cur-1)};
-  document.addEventListener('keydown',function(e){
-    if(['ArrowRight','ArrowDown','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1)}
-    else if(['ArrowLeft','ArrowUp','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1)}
-    else if(e.key==='Home')go(0);else if(e.key==='End')go(slides.length-1);
-  });
-  var x0=null;
-  document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX});
-  document.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)go(cur+(dx<0?1:-1));x0=null});
-  go(0);
-})();
-</script>
+  <script>
+    (function () {
+      var slides = [].slice.call(document.querySelectorAll('.slide')), cur = 0;
+      var dots = document.getElementById('dots'), count = document.getElementById('count');
+      slides.forEach(function (_, i) { var d = document.createElement('i'); d.onclick = function () { go(i) }; dots.appendChild(d) });
+      function go(n) {
+        if (n < 0 || n >= slides.length) return;
+        slides.forEach(function (s, i) { s.classList.toggle('active', i === n); s.classList.toggle('prev', i < n) });
+        [].forEach.call(dots.children, function (d, i) { d.classList.toggle('on', i === n) });
+        count.textContent = (n + 1) + ' / ' + slides.length; cur = n;
+      }
+      document.getElementById('next').onclick = function () { go(cur + 1) };
+      document.getElementById('prev').onclick = function () { go(cur - 1) };
+      document.addEventListener('keydown', function (e) {
+        if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) > -1) { e.preventDefault(); go(cur + 1) }
+        else if (['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) > -1) { e.preventDefault(); go(cur - 1) }
+        else if (e.key === 'Home') go(0); else if (e.key === 'End') go(slides.length - 1);
+      });
+      var x0 = null;
+      document.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX });
+      document.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1)); x0 = null });
+      go(0);
+    })();
+  </script>
 </body>
+
 </html>
