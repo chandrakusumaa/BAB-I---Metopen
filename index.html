@@ -357,112 +357,124 @@
 <body>
   <div class="deck" id="deck">
 
+    <!-- Slide 1: Judul Sementara -->
     <section class="slide cover active">
       <img src="Asset/Logo_Upn.jpg" alt="Logo UPN"
         style="width: clamp(100px, 14vw, 200px); height: auto; margin: 0 auto 3vh; display: block; object-fit: contain;">
-      <h1>Analisis Komparasi Aturan Warna RGB-YCbCr dan RGB-HSV sebagai Pra-pemrosesan Deep Learning pada Deteksi
-        Kebakaran Drone</h1>
+      <h1>Analisis Komparasi Aturan Warna RGB-YCbCr dan RGB-HSV sebagai Pra-pemrosesan Deep Learning pada Deteksi Kebakaran Drone</h1>
       <div class="who">
         <strong>Mursid Jafar Chandra Kusuma</strong><br>NIM 2510511030
         <small>S1 Informatika · Fakultas Ilmu Komputer · UPN “Veteran” Jakarta · 2026</small>
       </div>
     </section>
 
+    <!-- Slide 2: Research Problem -->
     <section class="slide">
-      <div class="tag">Latar Belakang</div>
-      <h2>Akar Masalah</h2>
-      <div style="text-align: justify;">
-        <ul>
-          <li><b>Tantangan Visual Pemantauan Udara:</b> Objek api pada citra drone seringkali berukuran sangat kecil dan
-            berbaur dengan dinamika pencahayaan luar ruangan (outdoor).</li>
-          <li><b>Kelemahan Deep Learning Murni:</b> Model yang murni mengandalkan data (data-driven) rentan menghasilkan
-            alarm palsu (false positive) akibat objek pengecoh
-            (noise visual) seperti pantulan cahaya atap atau dedaunan kering.</li>
-          <li><b>Krisis Sumber Daya Komputasi:</b> Arsitektur deep learning memberikan beban komputasi yang berat pada
-            perangkat drone (UAV), mengorbankan kecepatan pemrosesan
-            dan menghilangkan kemampuan deteksi real-time.</li>
-        </ul>
+      <div class="tag">Pendahuluan</div>
+      <h2>Research Problem (Akar Masalah)</h2>
+      <div class="cols eq">
+        <div class="card">
+          <h3>💻 Krisis Komputasi</h3>
+          <p style="text-align: justify; font-size: clamp(15px, 1.7vw, 26px);">
+            Sistem pendeteksi visual berbasis Deep Learning murni memiliki beban komputasi sangat berat, sehingga memicu penurunan kecepatan pemrosesan (FPS) secara drastis saat diterapkan pada perangkat drone (UAV) yang sumber dayanya terbatas.
+          </p>
+        </div>
+        <div class="card">
+          <h3>⚠️ Alarm Palsu (False Positive)</h3>
+          <p style="text-align: justify; font-size: clamp(15px, 1.7vw, 26px);">
+            Kondisi pencahayaan luar ruangan (outdoor) sering mengecoh model deep learning, menyebabkan objek mirip api (seperti atap merah, pantulan cahaya matahari, atau dedaunan kering) dideteksi sebagai kebakaran.
+          </p>
+        </div>
       </div>
     </section>
 
+    <!-- Slide 3: Evidence & Penelitian Terdahulu -->
     <section class="slide">
-      <div class="tag">Latar Belakang</div>
-      <h2>Solusi &amp; Research Gap</h2>
-      <div style="text-align: justify;">
-        <ul>
-          <li><b>Solusi Pra-pemrosesan Warna:</b> Segmentasi ruang warna (RGB, YCbCr, HSV) terbukti sangat ringan secara
-            komputasi dan efektif dalam menyaring
-            kandidat area api dari noise visual sebelum masuk ke model Deep Learning.</li>
-          <li><b>Research Gap:</b> belum ada komparasi langsung yang menguji efektivitas kombinasi aturan warna <b>(
-              RGB-YCbCr vs RGB-HSV)</b> sebagai lapis pra-pemrosesan deep learning pada perangkat drone.</li>
-          <li><b>Fokus Optimalisasi:</b> Menemukan "titik seimbang" (trade-off) paling ideal antara tingkat akurasi
-            (menekan false positive) dan kecepatan komputasi real-time di perangkat bersumber daya terbatas.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="slide">
-      <div class="tag">Pertanyaan Penelitian</div>
-      <h2>Rumusan Masalah</h2>
+      <div class="tag">Kajian Pustaka</div>
+      <h2>Evidence &amp; Penelitian Terdahulu</h2>
       <div style="text-align: justify;">
         <ol>
-          <li class="card">
+          <li class="card" style="margin-bottom: 2vh; padding: 1.5vh 2vw;">
             <div>
-              Bagaimana perbandingan tingkat akurasi (khususnya menekan <b>false positive</b>) antara
-              penggunaan kombinasi aturan warna RGB-YCbCr dan RGB-HSV sebagai metode pra-pemrosesan model deep learning
-              untuk deteksi kebakaran?
+              <b>Evidence 1 (Filter RGB-YCbCr):</b> Penelitian Baharuddin et al. (2025) membuktikan bahwa penggunaan aturan warna RGB-YCbCr pada model Single Shot Multibox Detector (SSD) secara signifikan mampu mengurangi tingkat false positive.
             </div>
           </li>
-          <li class="card">
+          <li class="card" style="margin-bottom: 2vh; padding: 1.5vh 2vw;">
             <div>
-              Bagaimana pengaruh penerapan kedua metode tersebut terhadap beban komputasi dan efisiensi waktu
-              pemrosesan (<b>Frame Per Second / FPS</b>) saat diimplementasikan secara real-time melalui citra drone?
+              <b>Evidence 2 (Filter HSV):</b> Buriboev et al. (2025) dan Munshi (2021) menunjukkan bahwa ruang warna HSV secara natural sangat tangguh dalam mengisolasi kandidat area api (Region of Interest) dan menyaring noise visual dari model klasifikasi utama.
+            </div>
+          </li>
+          <li class="card" style="margin-bottom: 2vh; padding: 1.5vh 2vw;">
+            <div>
+              <b>Evidence 3 (Efisiensi Waktu):</b> Tumonglo et al. (2019) membuktikan bahwa algoritma ruang warna (HSV dan YCbCr) tergolong sangat ringan dan dapat dieksekusi secara real-time hingga 0,022 detik pada quadcopter.
             </div>
           </li>
         </ol>
       </div>
     </section>
 
+    <!-- Slide 4: Research Gap & Research Position -->
     <section class="slide">
-      <div class="tag">Ruang Lingkup</div>
-      <h2>Batasan Masalah</h2>
-      <ul>
-        <li><b>Fokus Filter:</b> Terbatas pada perbandingan dua kombinasi metode pra-pemrosesan warna: RGB-YCbCr dan
-          RGB-HSV.</li>
-        <li><b>Model Klasifikasi:</b> Menggunakan satu arsitektur deep learning yang telah ditetapkan sebagai variabel
-          tetap (SSD atau YOLO)</li>
-        <li><b>Kondisi Pengujian:</b> Pengenalan piksel api difokuskan pada lingkungan luar ruangan (outdoor) pada
-          kondisi siang hari (daytime) dengan kondisi visual yang jelas menggunakan dataset citra atau video udara dari
-          UAV/drone.
-        </li>
-        <li><b>Metrik Evaluasi:</b> Difokuskan pada akurasi sistem (khususnya tingkat penolakan false positive) dan
-          efisiensi waktu komputasi (Frame Per Second / FPS).</li>
-        <li><b>Batasan Teknis:</b> Ranah penelitian berfokus murni pada rekayasa perangkat lunak (computer vision),
-          tidak mencakup perancangan hardware fisik, maupun sistem kendali terbang drone.</li>
-      </ul>
-    </section>
-
-    <section class="slide">
-      <div class="tag">Sasaran &amp; Kontribusi</div>
-      <h2>Tujuan &amp; Manfaat Penelitian</h2>
+      <div class="tag">Posisi Penelitian</div>
+      <h2>Research Gap &amp; Position</h2>
       <div class="cols eq">
         <div class="card">
-          <h3>🎯 Tujuan Penelitian</h3>
-          <ul style="text-align: justify;">
-            <li>Membandingkan tingkat akurasi (khususnya efektivitas menekan false positive) antara kombinasi
-              <b>RGB-YCbCr</b> dan <b>RGB-HSV</b>
-            </li>
-            <li>Mengukur dan menganalisis beban komputasi serta kecepatan pemrosesan secara real-time pada drone.
-            </li>
+          <h3>🔍 Research Gap</h3>
+          <p style="text-align: justify; font-size: clamp(15px, 1.7vw, 26px);">
+            Meskipun literatur membuktikan bahwa RGB-YCbCr dan RGB-HSV sama-sama efektif meringankan komputasi dan menyaring noise, <b>belum ada evaluasi komparatif (head-to-head)</b> yang menguji secara langsung kombinasi mana yang paling efisien ketika diintegrasikan sebagai lapis pra-pemrosesan deep learning pada platform drone.
+          </p>
+        </div>
+        <div class="card">
+          <h3>📍 Research Position</h3>
+          <p style="text-align: justify; font-size: clamp(15px, 1.7vw, 26px);">
+            Penelitian ini berada pada posisi <b>komparatif-eksperimental</b>. Menggabungkan temuan Baharuddin (RGB-YCbCr) dan Buriboev (HSV) ke dalam satu parameter pengujian (menggunakan model deep learning yang sama) untuk menemukan "titik seimbang" (trade-off) paling optimal antara tingkat presisi deteksi dan efisiensi FPS.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: Research Question & Tujuan Penelitian -->
+    <section class="slide">
+      <div class="tag">Fokus Studi</div>
+      <h2 style="margin-bottom: 2vh;">Research Question &amp; Tujuan</h2>
+      
+      <div style="margin-bottom: 2vh;">
+        <h3 style="margin-bottom: 1vh;">❓ Research Question</h3>
+        <ul style="text-align: justify; font-size: clamp(14px, 1.6vw, 24px);">
+          <li style="margin-bottom: 1vh;">Bagaimana perbandingan tingkat akurasi (khususnya efektivitas menekan false positive) antara penggunaan kombinasi aturan warna RGB-YCbCr dan RGB-HSV sebagai pra-pemrosesan deep learning?</li>
+          <li style="margin-bottom: 1vh;">Bagaimana pengaruh penerapan kedua metode tersebut terhadap beban komputasi dan efisiensi waktu pemrosesan (Frame Per Second / FPS) saat diimplementasikan secara real-time melalui citra drone?</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 1vh;">🎯 Tujuan Penelitian</h3>
+        <ul style="text-align: justify; font-size: clamp(14px, 1.6vw, 24px);">
+          <li style="margin-bottom: 1vh;">Membandingkan dan membuktikan secara empiris tingkat akurasi (penekanan false positive) dari kombinasi RGB-YCbCr melawan RGB-HSV.</li>
+          <li style="margin-bottom: 1vh;">Mengukur dan menganalisis dampak dari kedua metode pra-pemrosesan tersebut terhadap beban komputasi dan kecepatan operasional (FPS) pada perangkat drone.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 6: Batasan & Manfaat Penelitian -->
+    <section class="slide">
+      <div class="tag">Ruang Lingkup &amp; Kontribusi</div>
+      <h2>Batasan &amp; Manfaat Penelitian</h2>
+      <div class="cols eq">
+        <div class="card">
+          <h3 style="font-size: clamp(18px, 2vw, 30px);">🚧 Batasan Penelitian</h3>
+          <ul style="text-align: justify; font-size: clamp(13px, 1.5vw, 22px);">
+            <li style="margin-bottom: 1vh;"><b>Fokus Metode:</b> Hanya membandingkan pra-pemrosesan RGB-YCbCr dan RGB-HSV.</li>
+            <li style="margin-bottom: 1vh;"><b>Variabel Kontrol:</b> Menggunakan satu arsitektur deep learning tetap (misal: YOLOv8) agar perbandingan murni pada filter warnanya.</li>
+            <li style="margin-bottom: 1vh;"><b>Metrik Evaluasi:</b> Difokuskan pada akurasi (Confusion Matrix) dan kecepatan komputasi (FPS).</li>
+            <li style="margin-bottom: 1vh;"><b>Lingkungan &amp; Cahaya:</b> Pengenalan api pada citra udara outdoor di siang hari (daytime). Tidak mencakup malam hari (sensor thermal) atau asap tebal.</li>
+            <li style="margin-bottom: 1vh;"><b>Ranah Teknis:</b> Terbatas pada software (computer vision), tidak membahas rancang bangun hardware fisik atau aerodinamika penerbangan drone.</li>
           </ul>
         </div>
         <div class="card">
-          <h3>💡 Manfaat Penelitian</h3>
-          <ul style="text-align: justify;">
-            <li><b>Teoretis:</b> Menjawab research gap terkait efisiensi komputasi filter ruang warna pada arsitektur
-              deep learning berdaya terbatas.</li>
-            <li><b>Praktis:</b> Memberikan rekomendasi arsitektur optimal bagi developer computer vision dan menjadi
-              landasan sistem mitigasi bencana udara yang andal bagi instansi terkait (BNPB/Pemadam Kebakaran).</li>
+          <h3 style="font-size: clamp(18px, 2vw, 30px);">💡 Manfaat Penelitian</h3>
+          <ul style="text-align: justify; font-size: clamp(14px, 1.6vw, 24px);">
+            <li style="margin-bottom: 1.5vh;"><b>Teoretis:</b> Mengisi research gap mengenai interaksi antara segmentasi ruang warna dan efisiensi ekstraksi fitur deep learning pada perangkat keras bersumber daya terbatas.</li>
+            <li style="margin-bottom: 1.5vh;"><b>Praktis:</b> Menjadi rekomendasi teknis dan acuan bagi developer perangkat lunak serta instansi pemadam kebakaran (BPBD/BNPB) dalam merancang sistem mitigasi bencana dari udara yang ringan, responsif, dan bebas error.</li>
           </ul>
         </div>
       </div>
